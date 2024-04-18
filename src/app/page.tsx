@@ -1,10 +1,19 @@
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
+import { db } from "@/server/db";
+import Link from "next/link";
+import UploadFileTile from "./_components/UploadFileTile";
 
 export default async function HomePage() {
   const { getUser } = getKindeServerSession();
 
   const user = await getUser();
+
+  const userImages = await db.image.findMany({
+    where: {
+      userId: user?.id,
+    },
+  });
 
   if (!user)
     return (
@@ -19,8 +28,15 @@ export default async function HomePage() {
     );
 
   return (
-    <main className="flex flex-1 items-center justify-center">
-      Hello to (Share Sreens Fast)
+    <main className="flex flex-1 p-4">
+      <div className="flex flex-wrap gap-4">
+        {userImages.map((image) => (
+          <Link key={image.id} target="_blank" href={image.url}>
+            <img className="h-40 w-40 object-cover" src={image.url} />
+          </Link>
+        ))}
+        <UploadFileTile />
+      </div>
     </main>
   );
 }
