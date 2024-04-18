@@ -4,9 +4,11 @@
 
 ## TODO
 
-- [ ] Build basic UI
-- [ ] Auth using Kinde
-- [ ] Uplaod Images to AWS S3
-- [ ] Connect Supabase DB
+- [x] Build basic UI
+- [x] Auth using Kinde
+- [x] Uplaod Images to Uploadthing
+- [x] Connect Supabase DB
+- [ ] Delete imagesgita
 - [ ] Check if user can upload
-- [ ] Share link to your ss
+- [ ] Share link to your friends
+      And more soon...
