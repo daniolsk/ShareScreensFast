@@ -8,7 +8,7 @@
 - [x] Auth using Kinde
 - [x] Uplaod Images to Uploadthing
 - [x] Connect Supabase DB
-- [ ] Delete imagesgita
+- [ ] Delete images
 - [ ] Check if user can upload
 - [ ] Share link to your friends
       And more soon...
