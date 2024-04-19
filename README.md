@@ -1,3 +1,4 @@
+![logo](https://github.com/daniolsk/ShareScreensFast/blob/main/public/logo.png?raw=true)
 # Share Screens Fast
 
 > The easiest and fastest way to share full-res screenshots or other images.
