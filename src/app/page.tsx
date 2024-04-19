@@ -34,10 +34,13 @@ export default async function HomePage() {
   const userImages = await getMyImages();
 
   return (
-    <main className="p-4">
+    <main className="flex-1 overflow-y-auto p-4">
       <div className="grid grid-cols-3 items-center justify-items-center gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
         {userImages.map((image) => (
-          <div key={image.id} className="relative h-full w-full">
+          <div
+            key={image.id}
+            className="relative h-full w-full rounded-xl border-2 "
+          >
             <DeleteImageButton
               imageKey={image.key}
               handleDelete={handleDelete}
@@ -45,7 +48,7 @@ export default async function HomePage() {
             />
             <Link
               target="_blank"
-              className="flex h-full w-full items-center justify-center overflow-hidden rounded-xl border-2 shadow-lg"
+              className="flex h-full w-full items-center justify-center overflow-hidden p-4 shadow-lg hover:bg-slate-900"
               href={image.url}
             >
               <img className="aspect-square object-cover" src={image.url} />

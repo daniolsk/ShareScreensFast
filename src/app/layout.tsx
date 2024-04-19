@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { extractRouterConfig } from "uploadthing/server";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,6 +34,16 @@ export default function RootLayout({
         <NavBar />
         {children}
         <Toaster />
+        <footer className="border-t-2 p-4 text-center text-sm">
+          Made with ❤️ by{" "}
+          <Link
+            href="https://github.com/daniolsk"
+            target="_blank"
+            className="underline"
+          >
+            Daniel Skowron
+          </Link>
+        </footer>
       </body>
     </html>
   );
