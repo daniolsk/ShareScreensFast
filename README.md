@@ -15,9 +15,9 @@ And more soon...
 ## TODO
 
 - [x] Upload error handling and info [(using toasts)](https://ui.shadcn.com/docs/components/sonner)
-- [ ] Check if user can upload (Permissions)
-- [ ] Delete images
-- [ ] UI redesign
+- [x] Check if user can upload (Permissions)
+- [x] Delete images
+- [x] UI redesign
 - [ ] Logo + favicon
 - [ ] Image details page
 - [ ] Share link to your friends
