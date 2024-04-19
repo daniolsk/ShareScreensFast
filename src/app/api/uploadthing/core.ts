@@ -10,9 +10,9 @@ const { getUser, getPermission } = getKindeServerSession();
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
-  imageUploader: f({ image: { maxFileSize: "4MB" } })
+  imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
     // Set permissions and file types for this FileRoute
-    .middleware(async ({ req }) => {
+    .middleware(async ({}) => {
       // This code runs on your server before upload
       const user = await getUser();
 
@@ -30,7 +30,12 @@ export const ourFileRouter = {
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
       await db.image.create({
-        data: { url: file.url, userId: metadata.userId, name: file.name },
+        data: {
+          url: file.url,
+          userId: metadata.userId,
+          name: file.name,
+          key: file.key,
+        },
       });
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback

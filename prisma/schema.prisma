@@ -17,6 +17,7 @@ model Image {
   updatedAt DateTime @updatedAt
   userId    String
   url       String
+  key       String
 
   @@index([name])
 }
