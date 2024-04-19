@@ -49,7 +49,9 @@ export default function UploadFileTile() {
     onUploadError(error) {
       console.error(error);
       toast.dismiss("upload-begin");
-      toast.error("Upload failed");
+      toast.error("Upload failed", {
+        description: error.message,
+      });
     },
     onClientUploadComplete() {
       toast.dismiss("upload-begin");

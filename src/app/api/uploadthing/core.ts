@@ -5,7 +5,7 @@ import { db } from "@/server/db";
 
 const f = createUploadthing();
 
-const { getUser } = getKindeServerSession();
+const { getUser, getPermission } = getKindeServerSession();
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
@@ -18,6 +18,11 @@ export const ourFileRouter = {
 
       // If you throw, the user will not be able to upload
       if (!user) throw new UploadThingError("Unauthorized");
+
+      const canUpload = await getPermission("canUploadImages");
+
+      if (!canUpload?.isGranted)
+        throw new UploadThingError("User not permited to upload images");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };
