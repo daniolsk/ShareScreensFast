@@ -12,8 +12,12 @@ async function NavBar() {
 
   return (
     <div className="flex w-full justify-between border-b-2 p-4">
-      <Link href={"/"} className="text-xl font-semibold">
-        Share Screens Fast
+      <Link
+        href={"/"}
+        className="flex items-center gap-4 text-xl font-semibold"
+      >
+        <img src="/logo.png" alt="logo" className="h-8 w-8" />
+        <span>Share Screens Fast</span>
       </Link>
       {user ? (
         <div className="flex items-center gap-4 text-lg">

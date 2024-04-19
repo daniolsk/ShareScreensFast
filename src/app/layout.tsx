@@ -16,7 +16,7 @@ const inter = Inter({
 export const metadata = {
   title: "Share Screens Fast",
   description: "Share Screens Fast to everyone, anywhere",
-  icons: [{ rel: "icon", url: "/favicon.ico" }],
+  icons: [{ rel: "icon", url: "/favicon.png" }],
 };
 
 export default function RootLayout({
