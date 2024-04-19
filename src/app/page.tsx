@@ -17,8 +17,8 @@ export default async function HomePage() {
 
   if (!user)
     return (
-      <main className="flex flex-1 flex-col items-center justify-center gap-4 text-lg">
-        <div className="text-2xl">
+      <main className="flex flex-1 flex-col items-center justify-center gap-4 text-xl">
+        <div>
           Hello to{" "}
           <span className="font-semibold italic">Share Sreens Fast</span>
         </div>
@@ -32,7 +32,7 @@ export default async function HomePage() {
 
   return (
     <main className="p-4">
-      <div className="grid grid-cols-2 items-center justify-items-center gap-4 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
+      <div className="grid grid-cols-3 items-center justify-items-center gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
         {userImages.map((image) => (
           <Link
             key={image.id}

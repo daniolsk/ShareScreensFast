@@ -14,7 +14,7 @@ And more soon...
 
 ## TODO
 
-- [ ] Error handling [(using toasts)](https://ui.shadcn.com/docs/components/sonner)
+- [x] Upload error handling and info [(using toasts)](https://ui.shadcn.com/docs/components/sonner)
 - [ ] Check if user can upload (Permissions)
 - [ ] Delete images
 - [ ] UI redesign
