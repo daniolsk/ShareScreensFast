@@ -13,7 +13,7 @@ async function NavBar() {
   const user = await getUser();
 
   return (
-    <div className="flex w-full justify-between border-b-2 border-white bg-black p-4">
+    <div className="flex w-full justify-between border-b-2 p-4">
       <div className="text-xl font-semibold">Share Screens Fast</div>
       {user ? (
         <div className="flex items-center gap-4 text-lg">
