@@ -10,8 +10,6 @@ export default async function HomePage() {
 
   const user = await getUser();
 
-  const userImages = await getMyImages();
-
   const handleDelete = async (imageId: number, imageKey: string) => {
     "use server";
 
@@ -32,6 +30,8 @@ export default async function HomePage() {
         </div>
       </main>
     );
+
+  const userImages = await getMyImages();
 
   return (
     <main className="p-4">

@@ -10,6 +10,8 @@ const { getUser } = getKindeServerSession();
 export async function getMyImages() {
   const user = await getUser();
 
+  console.log(user);
+
   if (!user) throw new Error("Unauthorized");
 
   const images = await db.image.findMany({
