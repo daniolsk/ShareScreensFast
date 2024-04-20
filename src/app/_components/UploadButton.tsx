@@ -5,6 +5,8 @@ import { useUploadThing } from "@/utils/uploadthing";
 import { toast } from "sonner";
 import { Upload } from "lucide-react";
 import LoadingSpinnerSVG from "./LoadingSpinner";
+import { Progress } from "@/components/ui/progress";
+import { useEffect, useState } from "react";
 
 // inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
@@ -37,8 +39,27 @@ export default function UploadFileTile() {
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
       toast(
-        <div className="flex items-center gap-2 text-white">
-          <LoadingSpinnerSVG /> <span>Uploading...</span>
+        <div className="flex w-full items-center gap-4 text-white">
+          <LoadingSpinnerSVG />
+          <div className="flex w-full flex-col gap-2">
+            <div>Uploading...</div>
+            <Progress value={0} />
+          </div>
+        </div>,
+        {
+          duration: 100000,
+          id: "upload-begin",
+        },
+      );
+    },
+    onUploadProgress(p) {
+      toast(
+        <div className="flex w-full items-center gap-4 text-white">
+          <LoadingSpinnerSVG />
+          <div className="flex w-full flex-col gap-2">
+            <div>Uploading...</div>
+            <Progress value={p} />
+          </div>
         </div>,
         {
           duration: 100000,

@@ -28,7 +28,7 @@ function DeleteImageButton({
 }) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="absolute right-1 top-1 cursor-pointer rounded-xl bg-slate-900/90 p-1.5 shadow-lg hover:bg-slate-800/90">
+      <AlertDialogTrigger className="absolute right-1 top-1 cursor-pointer rounded-xl border-2 bg-slate-900/90 p-1.5 shadow-lg hover:bg-slate-800/90">
         <Trash size={18} />
       </AlertDialogTrigger>
       <AlertDialogContent>
