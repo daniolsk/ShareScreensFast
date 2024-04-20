@@ -22,7 +22,7 @@ async function NavBar() {
       </Link>
       {user ? (
         <div className="flex items-center gap-4 text-lg">
-          <div className="hidden sm:block">
+          <div>
             Hello <span className="font-semibold">{user.given_name}</span>
           </div>
           <Button
