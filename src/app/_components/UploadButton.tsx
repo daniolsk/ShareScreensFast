@@ -65,9 +65,12 @@ export default function UploadFileTile() {
     <div className="aspect-square h-full w-full rounded-xl border-2 bg-slate-900 shadow-lg hover:bg-slate-800">
       <label
         htmlFor="upload-button"
-        className="flex h-full w-full cursor-pointer items-center justify-center"
+        className="flex h-full w-full cursor-pointer flex-col items-center justify-center gap-4"
       >
         <Upload />
+        <span className="text-center text-xs text-slate-500">
+          (max file size is 16MB)
+        </span>
       </label>
       <input
         id="upload-button"

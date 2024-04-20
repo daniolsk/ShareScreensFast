@@ -10,9 +10,14 @@ const { getUser, getPermission } = getKindeServerSession();
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
-  imageUploader: f({ image: { maxFileSize: "4MB", maxFileCount: 1 } })
+  imageUploader: f({ image: { maxFileSize: "16MB", maxFileCount: 1 } })
     // Set permissions and file types for this FileRoute
-    .middleware(async ({}) => {
+    .middleware(async ({ files }) => {
+      files.forEach((file) => {
+        if (file.size > 16 * 1024 * 1024) {
+          throw new UploadThingError("File is too large");
+        }
+      });
       // This code runs on your server before upload
       const user = await getUser();
 
