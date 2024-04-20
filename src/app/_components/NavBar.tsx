@@ -4,6 +4,7 @@ import { LogOut, LogIn } from "lucide-react";
 
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 async function NavBar() {
   const { getUser } = getKindeServerSession();
@@ -17,23 +18,33 @@ async function NavBar() {
         className="flex items-center gap-4 text-xl font-semibold"
       >
         <img src="/logo.png" alt="logo" className="h-8 w-8" />
-        <span>Share Screens Fast</span>
+        <span className="hidden sm:block">Share Screens Fast</span>
       </Link>
       {user ? (
         <div className="flex items-center gap-4 text-lg">
           <div className="hidden sm:block">
             Hello <span className="font-semibold">{user.given_name}</span>
           </div>
-          <LogoutLink>
-            <LogOut />
-          </LogoutLink>
+          <Button
+            className="text-lg"
+            style={{ padding: "0" }}
+            variant={"outline"}
+          >
+            <LogoutLink className="h-full w-full p-2">
+              <LogOut size={20} />
+            </LogoutLink>
+          </Button>
         </div>
       ) : (
-        <div className="text-lg">
-          <LoginLink className="flex items-center gap-4 hover:underline">
-            Sign up <LogIn />
+        <Button
+          className="text-lg"
+          style={{ padding: "0" }}
+          variant={"outline"}
+        >
+          <LoginLink className="flex h-full w-full items-center gap-4 p-4">
+            Sign in <LogIn size={20} />
           </LoginLink>
-        </div>
+        </Button>
       )}
     </div>
   );
