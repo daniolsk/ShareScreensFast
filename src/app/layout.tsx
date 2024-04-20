@@ -29,6 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
       <body
+        suppressHydrationWarning={true}
         className={`dark font-sans ${inter.variable} flex min-h-screen flex-1 flex-col`}
       >
         <NavBar />

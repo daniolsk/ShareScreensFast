@@ -14,6 +14,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import test from "node:test";
 
 function DeleteImageButton({
   imageId,
@@ -39,7 +40,13 @@ function DeleteImageButton({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={() => handleDelete(imageId, imageKey)}>
+          <AlertDialogAction
+            onClick={async () => {
+              console.log("siema1");
+              await handleDelete(imageId, imageKey);
+              console.log("siema2");
+            }}
+          >
             Continue
           </AlertDialogAction>
         </AlertDialogFooter>
