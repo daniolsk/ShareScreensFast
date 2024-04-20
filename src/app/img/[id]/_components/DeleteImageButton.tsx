@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import LoadingSpinnerSVG from "@/components/LoadingSpinner";
-import { Trash } from "lucide-react";
 
 function DeleteImageButton({
   imageId,
@@ -28,8 +27,8 @@ function DeleteImageButton({
 }) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="absolute right-1 top-1 cursor-pointer rounded-xl border-2 bg-slate-900/90 p-1.5 shadow-lg hover:bg-slate-800/90">
-        <Trash size={18} />
+      <AlertDialogTrigger className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground ring-offset-background transition-colors hover:bg-destructive/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+        <div role="div">Delete</div>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

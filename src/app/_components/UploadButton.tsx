@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { useUploadThing } from "@/utils/uploadthing";
 import { toast } from "sonner";
 import { Upload } from "lucide-react";
-import LoadingSpinnerSVG from "./LoadingSpinner";
+import LoadingSpinnerSVG from "@/components/LoadingSpinner";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
 

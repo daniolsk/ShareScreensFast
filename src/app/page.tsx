@@ -47,9 +47,8 @@ export default async function HomePage() {
               imageId={image.id}
             />
             <Link
-              target="_blank"
               className="flex h-full w-full items-center justify-center overflow-hidden p-4 shadow-lg hover:bg-slate-900"
-              href={image.url}
+              href={`/img/${image.id}`}
             >
               <img className="aspect-square object-cover" src={image.url} />
             </Link>
