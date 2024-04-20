@@ -13,7 +13,7 @@ export default async function page({ params }: { params: { id: string } }) {
   };
 
   return (
-    <main className="flex flex-1 overflow-hidden">
+    <main className="flex flex-1 flex-col overflow-hidden md:flex-row">
       <div className="flex flex-[2] items-center justify-center p-4">
         <Link href={image.url} target="_blank">
           <img
@@ -23,7 +23,7 @@ export default async function page({ params }: { params: { id: string } }) {
           />
         </Link>
       </div>
-      <div className="flex flex-1 flex-col overflow-hidden border-l-2">
+      <div className="flex flex-col overflow-hidden border-t-2 md:flex-1 md:border-l-2">
         <div className="border-b-2 p-4">
           <div className="text-sm text-slate-500">Name</div>
           <div className="truncate text-lg font-semibold">{image.name}</div>

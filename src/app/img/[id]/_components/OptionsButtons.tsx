@@ -3,7 +3,6 @@
 import DeleteImageButton from "./DeleteImageButton";
 import { Button } from "@/components/ui/button";
 import type { Image } from "@prisma/client";
-import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 
@@ -19,7 +18,7 @@ function OptionsButtons({
       <Button
         variant={"outline"}
         onClick={async () => {
-          await navigator.clipboard.writeText(image.url);
+          await navigator.clipboard.writeText(window.location.href);
           toast("Link copied to clipboard!");
         }}
       >

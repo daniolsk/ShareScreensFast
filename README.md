@@ -1,4 +1,5 @@
 ![logo](https://github.com/daniolsk/ShareScreensFast/blob/main/public/logo.png?raw=true)
+
 # Share Screens Fast
 
 > The easiest and fastest way to share full-res screenshots or other images.
@@ -19,6 +20,7 @@ And more soon...
 - [x] Check if user can upload (Permissions)
 - [x] Delete images
 - [x] UI redesign
-- [ ] Logo + favicon
-- [ ] Image details page
-- [ ] Share link to your friends
+- [x] Logo + favicon
+- [x] Image details page
+- [x] Share link to your friends
+- [x] Image details page on mobile
