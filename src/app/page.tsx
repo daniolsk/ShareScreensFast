@@ -40,7 +40,7 @@ export default async function HomePage() {
         {userImages.map((image) => (
           <div
             key={image.id}
-            className="relative h-full w-full rounded-xl border-2 "
+            className="relative h-full w-full rounded-xl border-2"
           >
             <DeleteImageButton
               imageKey={image.key}

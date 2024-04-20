@@ -83,7 +83,7 @@ export default function UploadFileTile() {
   });
 
   return (
-    <div className="aspect-square h-full w-full rounded-xl border-2 bg-slate-900 shadow-lg hover:bg-slate-800">
+    <div className="aspect-square h-full w-full rounded-xl border-2 bg-slate-900 shadow-lg hover:bg-slate-800 p-1 md:p-4">
       <label
         htmlFor="upload-button"
         className="flex h-full w-full cursor-pointer flex-col items-center justify-center gap-4"
