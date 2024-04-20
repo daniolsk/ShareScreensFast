@@ -15,6 +15,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import test from "node:test";
+import { toast } from "sonner";
+import LoadingSpinnerSVG from "./LoadingSpinner";
 
 function DeleteImageButton({
   imageId,
@@ -42,9 +44,20 @@ function DeleteImageButton({
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             onClick={async () => {
-              console.log("siema1");
+              toast(
+                <div className="flex items-center gap-2 text-white">
+                  <LoadingSpinnerSVG /> <span>Deleting...</span>
+                </div>,
+                {
+                  duration: 100000,
+                  id: "delete-begin",
+                },
+              );
+
               await handleDelete(imageId, imageKey);
-              console.log("siema2");
+
+              toast.dismiss("delete-begin");
+              toast.success("Image deleted!");
             }}
           >
             Continue
