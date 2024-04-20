@@ -5,6 +5,7 @@ import { LogOut, LogIn } from "lucide-react";
 import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 async function NavBar() {
   const { getUser } = getKindeServerSession();
@@ -17,7 +18,13 @@ async function NavBar() {
         href={"/"}
         className="flex items-center gap-4 text-xl font-semibold"
       >
-        <img src="/logo.png" alt="logo" className="h-8 w-8" />
+        <Image
+          src="/logo.png"
+          alt="logo"
+          className="h-8 w-8"
+          width={32}
+          height={32}
+        />
         <span className="hidden sm:block">Share Screens Fast</span>
       </Link>
       {user ? (

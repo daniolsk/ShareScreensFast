@@ -2,6 +2,7 @@ import { deleteImage, getImage } from "@/server/actions";
 import Link from "next/link";
 import React from "react";
 import OptionsButtons from "./_components/OptionsButtons";
+import Image from "next/image";
 
 export default async function page({ params }: { params: { id: string } }) {
   const image = await getImage(parseInt(params.id));

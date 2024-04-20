@@ -4,6 +4,7 @@ import Link from "next/link";
 import UploadButton from "./_components/UploadButton";
 import { deleteImage, getMyImages } from "@/server/actions";
 import DeleteImageButton from "./_components/DeleteImageButton";
+import Image from "next/image";
 
 export default async function HomePage() {
   const { getUser } = getKindeServerSession();
@@ -50,7 +51,13 @@ export default async function HomePage() {
               className="flex h-full w-full items-center justify-center overflow-hidden p-4 shadow-lg hover:bg-slate-900"
               href={`/img/${image.id}`}
             >
-              <img className="aspect-square object-cover" src={image.url} />
+              <Image
+                className="aspect-square object-cover"
+                src={image.url}
+                width={150}
+                height={150}
+                alt="image"
+              />
             </Link>
           </div>
         ))}
