@@ -89,12 +89,6 @@ export async function POST(req: Request) {
 
       break;
     case "user.deleted":
-      const deletedUser = await db.user.delete({
-        where: {
-          id: evt.data.id,
-        },
-      });
-
       const deletedUserImages = await db.image.findMany({
         where: {
           userId: evt.data.id,
@@ -104,20 +98,22 @@ export async function POST(req: Request) {
       if (deletedUserImages.length > 0) {
         const keys = deletedUserImages.map((image) => image.key);
 
-        await utapi.deleteFiles(keys);
-
-        await db.image.deleteMany({
-          where: {
-            userId: evt.data.id,
-          },
-        });
+        await utapi.deleteFiles([...keys]);
       }
 
-      if (!deletedUser) {
-        return new Response("Failed to delete user", {
-          status: 500,
-        });
-      }
+      const imagesToDelete = db.image.deleteMany({
+        where: {
+          userId: evt.data.id,
+        },
+      });
+
+      const userToDelete = db.user.delete({
+        where: {
+          id: evt.data.id,
+        },
+      });
+
+      await db.$transaction([imagesToDelete, userToDelete]);
 
       break;
     default:
