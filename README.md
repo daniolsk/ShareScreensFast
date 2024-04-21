@@ -8,7 +8,7 @@
 
 ## Features
 
-- [x] Auth using [Kinde](https://kinde.com/)
+- [x] Auth using [Clerk](https://clerk.com/)
 - [x] Images upload using [Uploadthing](https://uploadthing.com/)
 - [x] PostgreSQL using [Supabase](https://supabase.com/)
 

@@ -1,15 +1,13 @@
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { LoginLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
 import UploadButton from "./_components/UploadButton";
 import { deleteImage, getMyImages } from "@/server/actions";
 import DeleteImageButton from "./_components/DeleteImageButton";
 import Image from "next/image";
+import { auth } from "@clerk/nextjs/server";
+import { SignInButton } from "@clerk/nextjs";
 
 export default async function HomePage() {
-  const { getUser } = getKindeServerSession();
-
-  const user = await getUser();
+  const { userId } = auth();
 
   const handleDelete = async (imageId: number, imageKey: string) => {
     "use server";
@@ -17,7 +15,7 @@ export default async function HomePage() {
     await deleteImage(imageId, imageKey);
   };
 
-  if (!user)
+  if (!userId)
     return (
       <main className="flex flex-1 flex-col items-center justify-center gap-4 text-xl">
         <div>
@@ -26,7 +24,11 @@ export default async function HomePage() {
         </div>
         <div>
           Please{" "}
-          <LoginLink className="font-semibold hover:underline">Login</LoginLink>{" "}
+          <SignInButton mode="modal">
+            <span className="cursor-pointer font-semibold hover:underline">
+              Login
+            </span>
+          </SignInButton>{" "}
           to use the app!
         </div>
       </main>

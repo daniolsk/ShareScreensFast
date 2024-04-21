@@ -1,11 +1,9 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/server/db";
 
 const f = createUploadthing();
-
-const { getUser, getPermission } = getKindeServerSession();
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
@@ -19,15 +17,15 @@ export const ourFileRouter = {
         }
       });
       // This code runs on your server before upload
-      const user = await getUser();
+      const user = await currentUser();
 
       // If you throw, the user will not be able to upload
       if (!user) throw new UploadThingError("Unauthorized");
 
-      const canUpload = await getPermission("canUploadImages");
+      // const canUpload = await getPermission("canUploadImages");
 
-      if (!canUpload?.isGranted)
-        throw new UploadThingError("User not permited to upload images");
+      // if (!canUpload?.isGranted)
+      //   throw new UploadThingError("User not permited to upload images");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.id };

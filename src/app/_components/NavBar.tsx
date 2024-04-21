@@ -1,16 +1,13 @@
 import React from "react";
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 import { LogOut, LogIn } from "lucide-react";
-
-import { LoginLink, LogoutLink } from "@kinde-oss/kinde-auth-nextjs/components";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { currentUser } from "@clerk/nextjs/server";
+import { SignInButton, SignOutButton, UserButton } from "@clerk/nextjs";
 
 async function NavBar() {
-  const { getUser } = getKindeServerSession();
-
-  const user = await getUser();
+  const user = await currentUser();
 
   return (
     <div className="flex w-full justify-between border-b-2 p-4">
@@ -30,28 +27,22 @@ async function NavBar() {
       {user ? (
         <div className="flex items-center gap-4 text-lg">
           <div>
-            Hello <span className="font-semibold">{user.given_name}</span>
+            Hello <span className="font-semibold">{user.firstName}</span>
           </div>
+          <UserButton />
+        </div>
+      ) : (
+        <SignInButton mode="modal">
           <Button
             className="text-lg"
             style={{ padding: "0" }}
             variant={"outline"}
           >
-            <LogoutLink className="h-full w-full p-2">
-              <LogOut size={20} />
-            </LogoutLink>
+            <div className="flex h-full w-full items-center gap-4 p-4">
+              Sign in <LogIn size={20} />
+            </div>
           </Button>
-        </div>
-      ) : (
-        <Button
-          className="text-lg"
-          style={{ padding: "0" }}
-          variant={"outline"}
-        >
-          <LoginLink className="flex h-full w-full items-center gap-4 p-4">
-            Sign in <LogIn size={20} />
-          </LoginLink>
-        </Button>
+        </SignInButton>
       )}
     </div>
   );

@@ -1,16 +1,12 @@
 import "server-only";
 
-import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/server/db";
 import { redirect } from "next/navigation";
 import { utapi } from "@/server/uploadthing";
 
-const { getUser } = getKindeServerSession();
-
 export async function getMyImages() {
-  const user = await getUser();
-
-  console.log(user);
+  const user = await currentUser();
 
   if (!user) throw new Error("Unauthorized");
 
@@ -36,7 +32,7 @@ export async function getImage(id: number) {
 }
 
 export async function deleteImage(id: number, imageKey: string) {
-  const user = await getUser();
+  const user = await currentUser();
 
   if (!user) throw new Error("Unauthorized");
 

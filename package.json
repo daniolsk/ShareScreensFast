@@ -13,6 +13,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@clerk/nextjs": "^5.0.1",
+    "@clerk/themes": "^2.0.0",
     "@kinde-oss/kinde-auth-nextjs": "^2.2.3",
     "@prisma/client": "^5.12.1",
     "@radix-ui/react-alert-dialog": "^1.0.5",
