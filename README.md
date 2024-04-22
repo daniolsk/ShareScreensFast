@@ -11,16 +11,12 @@
 - [x] Auth using [Clerk](https://clerk.com/)
 - [x] Images upload using [Uploadthing](https://uploadthing.com/)
 - [x] PostgreSQL using [Supabase](https://supabase.com/)
+- [x] Subscription payments using [Stripe](https://stripe.com/en-pl)
+- [x] Pro 🔥 and Demo accounts (demo limited to 5 uploads)
 
 And more soon...
 
-## TODO
+# TODO
 
-- [x] Upload error handling and info [(using toasts)](https://ui.shadcn.com/docs/components/sonner)
-- [x] Check if user can upload (Permissions)
-- [x] Delete images
-- [x] UI redesign
-- [x] Logo + favicon
-- [x] Image details page
-- [x] Share link to your friends
-- [x] Image details page on mobile
+- [] Settings on mobile + UI redesign
+- [] Fix UI colors (clerk)

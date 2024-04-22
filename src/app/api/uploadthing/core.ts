@@ -1,14 +1,16 @@
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { db } from "@/server/db";
+import { checkIfLimit, incrementLimit } from "@/lib/limits";
+import { checkSubscription } from "@/lib/subscription";
 
 const f = createUploadthing();
 
 // FileRouter for your app, can contain multiple FileRoutes
 export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
-  imageUploader: f({ image: { maxFileSize: "16MB", maxFileCount: 1 } })
+  imageUploader: f({ image: { maxFileSize: "16MB", maxFileCount: 5 } })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ files }) => {
       files.forEach((file) => {
@@ -17,18 +19,23 @@ export const ourFileRouter = {
         }
       });
       // This code runs on your server before upload
-      const user = await currentUser();
+      const { userId } = auth();
 
       // If you throw, the user will not be able to upload
-      if (!user) throw new UploadThingError("Unauthorized");
+      if (!userId) throw new UploadThingError("Unauthorized");
 
-      // const canUpload = await getPermission("canUploadImages");
+      const isSubscribed = await checkSubscription();
 
-      // if (!canUpload?.isGranted)
-      //   throw new UploadThingError("User not permited to upload images");
+      if (!isSubscribed) {
+        if (await checkIfLimit(files.length)) {
+          throw new UploadThingError("Upload limit reached!");
+        }
+
+        await incrementLimit(files.length);
+      }
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { userId: user.id };
+      return { userId: userId };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload

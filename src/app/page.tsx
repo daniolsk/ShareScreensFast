@@ -39,33 +39,35 @@ export default async function HomePage() {
   const userImages = await getMyImages();
 
   return (
-    <main className="flex-1 overflow-y-auto p-4">
-      <div className="grid grid-cols-3 items-center justify-items-center gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8">
-        {userImages.map((image) => (
-          <div
-            key={image.id}
-            className="relative h-full w-full rounded-xl border-2"
-          >
-            <DeleteImageButton
-              imageKey={image.key}
-              handleDelete={handleDelete}
-              imageId={image.id}
-            />
-            <Link
-              className="flex h-full w-full items-center justify-center overflow-hidden p-4 shadow-lg hover:bg-slate-900"
-              href={`/img/${image.id}`}
+    <main className="flex-1">
+      <div className="mx-auto w-full max-w-7xl flex-1 overflow-y-auto p-4">
+        <div className="grid grid-cols-3 items-center justify-items-center gap-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7">
+          {userImages.map((image) => (
+            <div
+              key={image.id}
+              className="relative h-full w-full rounded-xl border-2"
             >
-              <Image
-                className="aspect-square object-cover"
-                src={image.url}
-                width={150}
-                height={150}
-                alt="image"
+              <DeleteImageButton
+                imageKey={image.key}
+                handleDelete={handleDelete}
+                imageId={image.id}
               />
-            </Link>
-          </div>
-        ))}
-        <UploadButton />
+              <Link
+                className="flex h-full w-full items-center justify-center overflow-hidden p-4 shadow-lg hover:bg-slate-900"
+                href={`/img/${image.id}`}
+              >
+                <Image
+                  className="aspect-square object-cover"
+                  src={image.url}
+                  width={150}
+                  height={150}
+                  alt="image"
+                />
+              </Link>
+            </div>
+          ))}
+          <UploadButton />
+        </div>
       </div>
     </main>
   );

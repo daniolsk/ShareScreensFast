@@ -14,11 +14,13 @@ export function UpgradeToProButton({
 }
 
 export function ShowSubscriptionDetailsButton({
-  handleUpgradeToPro,
+  handleManageSubscription,
 }: {
-  handleUpgradeToPro: () => void;
+  handleManageSubscription: () => void;
 }) {
   return (
-    <Button onClick={() => handleUpgradeToPro()}>Manage My Subscription</Button>
+    <Button onClick={() => handleManageSubscription()}>
+      Manage My Subscription
+    </Button>
   );
 }

@@ -1,9 +1,11 @@
 import "server-only";
 
-import { currentUser } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "@/server/db";
 import { redirect } from "next/navigation";
 import { utapi } from "@/server/uploadthing";
+import { decrementLimit } from "@/lib/limits";
+import { checkSubscription } from "@/lib/subscription";
 
 export async function getMyImages() {
   const user = await currentUser();
@@ -32,11 +34,15 @@ export async function getImage(id: number) {
 }
 
 export async function deleteImage(id: number, imageKey: string) {
-  const user = await currentUser();
+  const { userId } = auth();
 
-  if (!user) throw new Error("Unauthorized");
+  if (!userId) throw new Error("Unauthorized");
 
   await utapi.deleteFiles(imageKey);
+
+  const isSubscribed = await checkSubscription();
+
+  if (!isSubscribed) await decrementLimit();
 
   const image = await db.image.findFirst({
     where: {
@@ -45,7 +51,7 @@ export async function deleteImage(id: number, imageKey: string) {
   });
 
   if (!image) throw new Error("Image not found");
-  if (image.userId !== user.id) throw new Error("Unauthorized");
+  if (image.userId !== userId) throw new Error("Unauthorized");
 
   await db.image.delete({ where: { id: id } });
 
