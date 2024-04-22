@@ -1,4 +1,4 @@
-import { deleteImage, getImage } from "@/server/actions";
+import { deleteImage, getImage } from "@/server/actions/image";
 import Link from "next/link";
 import React from "react";
 import OptionsButtons from "./_components/OptionsButtons";

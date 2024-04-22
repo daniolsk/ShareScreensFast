@@ -10,23 +10,23 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id
-  createdAt DateTime
-  email     String
-  Image     Image[]
-}
-
 model Image {
   id        Int      @id @default(autoincrement())
   name      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  url       String
-  key       String
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
+  url       String   @unique
+  key       String   @unique
+  userId    String
 
   @@index([name])
+}
+
+model UserSubscription {
+  id                     Int       @id @default(autoincrement())
+  userId                 String    @unique
+  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?   @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
 }

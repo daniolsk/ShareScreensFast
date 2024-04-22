@@ -1,10 +1,12 @@
 import Link from "next/link";
 import UploadButton from "./_components/UploadButton";
-import { deleteImage, getMyImages } from "@/server/actions";
+import { deleteImage, getMyImages } from "@/server/actions/image";
 import DeleteImageButton from "./_components/DeleteImageButton";
 import Image from "next/image";
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { SignInButton } from "@clerk/nextjs";
+import { stripe } from "@/server/stripe";
+import { db } from "@/server/db";
 
 export default async function HomePage() {
   const { userId } = auth();
