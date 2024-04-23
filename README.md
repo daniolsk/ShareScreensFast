@@ -15,8 +15,3 @@
 - [x] Pro 🔥 and Demo accounts (demo limited to 5 uploads)
 
 And more soon...
-
-### TODO
-
-- [ ] Settings on mobile + UI redesign
-- [ ] Fix UI colors (clerk)
