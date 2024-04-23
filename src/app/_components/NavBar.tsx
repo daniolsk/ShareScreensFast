@@ -1,16 +1,12 @@
 import React from "react";
-import { LogIn, Settings } from "lucide-react";
+import { Settings } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
 import { currentUser } from "@clerk/nextjs/server";
-import { SignInButton, UserButton } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 import { Badge } from "@/components/ui/badge";
 import { checkSubscription } from "@/lib/subscription";
-import {
-  UpgradeToProButton,
-  ShowSubscriptionDetailsButton,
-} from "../../components/StripeActionButtons";
+import { UpgradeToProNavButton } from "../../components/StripeActionButtons";
 import { getStripeRedirect } from "@/server/actions/stripe";
 import ThemeToggler from "./ThemeToggler";
 import Logo from "./Logo";
@@ -29,7 +25,7 @@ async function NavBar() {
             {isSubscribed ? (
               <Badge className="text-nowrap">Pro 🔥</Badge>
             ) : (
-              <UpgradeToProButton handleUpgradeToPro={getStripeRedirect} />
+              <UpgradeToProNavButton handleUpgradeToPro={getStripeRedirect} />
             )}
             <Link href="/settings/profile" className="cursor-pointer">
               <Button variant={"ghost"} size="icon">
