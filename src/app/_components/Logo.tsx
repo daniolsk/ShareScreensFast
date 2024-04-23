@@ -3,11 +3,8 @@
 import Link from "next/link";
 import React from "react";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 
 function Logo() {
-  const { theme } = useTheme();
-
   return (
     <Link
       href={"/"}
@@ -16,14 +13,14 @@ function Logo() {
       <Image
         src="/logo-dark.svg"
         alt="logo"
-        className="h-8 w-8 dark:hidden"
+        className="h-10 w-10 dark:hidden"
         width={32}
         height={32}
       />
       <Image
         src="/logo-light.svg"
         alt="logo"
-        className="hidden h-8 w-8 dark:block"
+        className="hidden h-10 w-10 dark:block"
         width={32}
         height={32}
       />
