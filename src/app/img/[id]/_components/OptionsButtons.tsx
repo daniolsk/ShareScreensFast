@@ -14,9 +14,10 @@ function OptionsButtons({
   handleDelete: (imageId: number, imageKey: string) => Promise<void>;
 }) {
   return (
-    <div className="flex gap-4 p-4">
+    <div className="flex gap-4">
       <Button
         variant={"outline"}
+        className="flex-1"
         onClick={async () => {
           await navigator.clipboard.writeText(window.location.href);
           toast("Link copied to clipboard!");

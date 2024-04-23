@@ -14,8 +14,8 @@ export default async function page({ params }: { params: { id: string } }) {
   };
 
   return (
-    <main className="flex flex-1 flex-col overflow-hidden md:flex-row">
-      <div className="flex flex-[2] items-center justify-center p-4">
+    <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-4 overflow-hidden p-4 lg:flex-row">
+      <div className="flex flex-[3] items-center justify-center rounded-lg border-2 p-4">
         <Link href={image.url} target="_blank">
           <img
             src={image.url}
@@ -24,12 +24,12 @@ export default async function page({ params }: { params: { id: string } }) {
           />
         </Link>
       </div>
-      <div className="flex flex-col overflow-hidden border-t-2 md:flex-1 md:border-l-2">
-        <div className="border-b-2 p-4">
+      <div className="flex flex-col gap-4 overflow-hidden rounded-lg border-2 p-4 px-4 md:flex-1">
+        <div>
           <div className="text-sm text-slate-500">Name</div>
           <div className="truncate text-lg font-semibold">{image.name}</div>
         </div>
-        <div className="border-b-2 p-4">
+        <div>
           <div className="text-sm text-slate-500">Created At</div>
           <div className="truncate text-lg font-semibold">
             {image.createdAt.toLocaleString()}

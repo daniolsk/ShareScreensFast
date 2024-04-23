@@ -5,7 +5,7 @@ import "./style.css";
 
 export default async function Page() {
   return (
-    <div className="h-full w-full">
+    <div className="w-full flex-1">
       <UserProfile routing="hash" />
     </div>
   );

@@ -9,9 +9,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <main className="mx-auto flex w-full max-w-7xl flex-1">
-      <nav className="flex flex-col gap-4 p-4">
-        <Link href={"/settings/profile"}>
+    <main className="mx-auto flex h-full w-full max-w-7xl flex-1 flex-col md:flex-row">
+      <nav className="flex flex-row gap-4 p-4 md:flex-col">
+        <Link href={"/settings/profile"} className="flex-1 md:flex-[0]">
           <Button
             variant={pathname == "/settings/profile" ? "default" : "ghost"}
             className="w-full justify-start gap-2"
@@ -20,7 +20,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             Profile
           </Button>
         </Link>
-        <Link href={"/settings/billing"}>
+        <Link href={"/settings/billing"} className="flex-1 md:flex-[0]">
           <Button
             variant={pathname == "/settings/billing" ? "default" : "ghost"}
             className="w-full justify-start gap-2"
@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Button>
         </Link>
       </nav>
-      <section className="flex-1 p-4">{children}</section>
+      <section className="flex w-full flex-1 p-4">{children}</section>
     </main>
   );
 }

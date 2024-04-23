@@ -14,7 +14,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
-import LoadingSpinnerSVG from "@/components/LoadingSpinner";
+import { Loader2 } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 function DeleteImageButton({
   imageId,
@@ -27,8 +28,10 @@ function DeleteImageButton({
 }) {
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="inline-flex h-10 items-center justify-center whitespace-nowrap rounded-md bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground ring-offset-background transition-colors hover:bg-destructive/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-        <div role="div">Delete</div>
+      <AlertDialogTrigger asChild>
+        <Button variant={"destructive"} className="flex-1">
+          <div role="div">Delete</div>
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -43,8 +46,9 @@ function DeleteImageButton({
           <AlertDialogAction
             onClick={async () => {
               toast(
-                <div className="flex items-center gap-2 text-white">
-                  <LoadingSpinnerSVG /> <span>Deleting...</span>
+                <div className="flex items-center gap-2">
+                  <Loader2 className="h-[1.2rem] w-[1.2rem] animate-spin" />{" "}
+                  <span>Deleting...</span>
                 </div>,
                 {
                   duration: 100000,

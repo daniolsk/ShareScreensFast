@@ -8,9 +8,10 @@ import { extractRouterConfig } from "uploadthing/server";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import Link from "next/link";
+import { ThemeProvider } from "./_components/ThemeProvider";
 
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+import Footer from "./_components/Footer";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -29,30 +30,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-      }}
-    >
-      <html lang="en">
+    <ClerkProvider>
+      <html lang="en" suppressHydrationWarning={true}>
         <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
         <body
           suppressHydrationWarning={true}
-          className={`dark font-sans ${inter.variable} flex min-h-screen flex-1 flex-col`}
+          className={`font-sans ${inter.variable} flex min-h-screen flex-1 flex-col`}
         >
-          <NavBar />
-          {children}
-          <Toaster />
-          <footer className="border-t-2 p-4 text-center text-sm">
-            Made with ❤️ by{" "}
-            <Link
-              href="https://github.com/daniolsk"
-              target="_blank"
-              className="underline"
-            >
-              Daniel Skowron
-            </Link>
-          </footer>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="light"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NavBar />
+            {children}
+            <Toaster />
+            <Footer />
+          </ThemeProvider>
         </body>
       </html>
     </ClerkProvider>

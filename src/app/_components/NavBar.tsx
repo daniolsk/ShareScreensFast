@@ -12,64 +12,39 @@ import {
   ShowSubscriptionDetailsButton,
 } from "../../components/StripeActionButtons";
 import { getStripeRedirect } from "@/server/actions/stripe";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import ThemeToggler from "./ThemeToggler";
+import Logo from "./Logo";
 
 async function NavBar() {
   const user = await currentUser();
 
   const isSubscribed = await checkSubscription();
 
-  const handleStripeAction = async () => {
-    "use server";
-
-    await getStripeRedirect();
-  };
-
   return (
-    <div className="border-b-2">
+    <div>
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-4">
-        <Link
-          href={"/"}
-          className="flex items-center gap-4 text-xl font-semibold hover:underline"
-        >
-          <Image
-            src="/logo.png"
-            alt="logo"
-            className="h-8 w-8"
-            width={32}
-            height={32}
-          />
-          <span className="hidden sm:block">Share Screens Fast</span>
-        </Link>
-        {!isSubscribed && user ? (
-          <div>
-            <UpgradeToProButton handleUpgradeToPro={handleStripeAction} />
-          </div>
-        ) : null}
+        <Logo />
         {user ? (
-          <div className="flex items-center gap-4 text-lg">
+          <div className="flex items-center gap-2 text-lg">
             {isSubscribed ? (
               <Badge className="text-nowrap">Pro 🔥</Badge>
             ) : (
-              <Badge variant={"outline"}>Demo</Badge>
+              <UpgradeToProButton handleUpgradeToPro={getStripeRedirect} />
             )}
-            <UserButton showName userProfileUrl="/settings/profile" />
             <Link href="/settings/profile" className="cursor-pointer">
-              <Settings className="transition-transform hover:rotate-45" />
+              <Button variant={"ghost"} size="icon">
+                <Settings className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
             </Link>
+            <ThemeToggler />
+            <div className="flex w-[40px] items-center justify-center">
+              <UserButton userProfileUrl="/settings/profile" />
+            </div>
           </div>
         ) : (
-          <SignInButton mode="modal">
-            <Button
-              className="text-lg"
-              style={{ padding: "0" }}
-              variant={"outline"}
-            >
-              <div className="flex h-full w-full items-center gap-4 p-4">
-                Sign in <LogIn size={20} />
-              </div>
-            </Button>
-          </SignInButton>
+          <div className="flex h-[40px] w-[40px] items-center justify-center">
+            <ThemeToggler />
+          </div>
         )}
       </div>
     </div>

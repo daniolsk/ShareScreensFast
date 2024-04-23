@@ -1,3 +1,4 @@
+"use server";
 import "server-only";
 
 import { currentUser, auth } from "@clerk/nextjs/server";
@@ -6,7 +7,7 @@ import { redirect } from "next/navigation";
 import { stripe } from "../stripe";
 import { absolutePath } from "@/lib/utils";
 
-const settingsUrl = absolutePath("/settings");
+const settingsUrl = absolutePath("/");
 
 export async function getStripeRedirect() {
   const { userId } = auth();

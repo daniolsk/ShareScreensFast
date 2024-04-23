@@ -4,9 +4,10 @@ import { useRouter } from "next/navigation";
 import { useUploadThing } from "@/utils/uploadthing";
 import { toast } from "sonner";
 import { Upload } from "lucide-react";
-import LoadingSpinnerSVG from "@/components/LoadingSpinner";
+import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
 import { useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
 
 // inferred input off useUploadThing
 type Input = Parameters<typeof useUploadThing>;
@@ -39,8 +40,8 @@ export default function UploadFileTile() {
   const { inputProps } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
       toast(
-        <div className="flex w-full items-center gap-4 text-white">
-          <LoadingSpinnerSVG />
+        <div className="flex w-full items-center gap-4">
+          <Loader2 className="h-[1.2rem] w-[1.2rem] animate-spin" />
           <div className="flex w-full flex-col gap-2">
             <div>Uploading...</div>
             <Progress value={0} />
@@ -54,8 +55,8 @@ export default function UploadFileTile() {
     },
     onUploadProgress(p) {
       toast(
-        <div className="flex w-full items-center gap-4 text-white">
-          <LoadingSpinnerSVG />
+        <div className="flex w-full items-center gap-4">
+          <Loader2 className="h-[1.2rem] w-[1.2rem] animate-spin" />
           <div className="flex w-full flex-col gap-2">
             <div>Uploading...</div>
             <Progress value={p} />
@@ -83,7 +84,10 @@ export default function UploadFileTile() {
   });
 
   return (
-    <div className="aspect-square h-full w-full rounded-xl border-2 bg-slate-900 p-1 shadow-lg hover:bg-slate-800 md:p-4">
+    <Button
+      variant={"outline"}
+      className="aspect-square h-full w-full rounded-xl border-2 p-1 shadow-md transition-all hover:shadow-lg md:p-4"
+    >
       <label
         htmlFor="upload-button"
         className="flex h-full w-full cursor-pointer flex-col items-center justify-center gap-4"
@@ -99,6 +103,6 @@ export default function UploadFileTile() {
         className="sr-only"
         {...inputProps}
       />
-    </div>
+    </Button>
   );
 }
