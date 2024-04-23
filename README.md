@@ -16,7 +16,7 @@
 
 And more soon...
 
-# TODO
+### TODO
 
-- [] Settings on mobile + UI redesign
-- [] Fix UI colors (clerk)
+- [ ] Settings on mobile + UI redesign
+- [ ] Fix UI colors (clerk)
