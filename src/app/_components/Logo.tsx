@@ -8,7 +8,7 @@ function Logo() {
   return (
     <Link
       href={"/"}
-      className="flex items-center gap-4 text-xl font-semibold hover:underline"
+      className="flex items-center gap-4 text-xl font-semibold transition-all hover:scale-105"
     >
       <Image
         src="/logo-dark.svg"

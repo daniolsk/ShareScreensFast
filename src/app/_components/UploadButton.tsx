@@ -86,7 +86,7 @@ export default function UploadFileTile() {
   return (
     <Button
       variant={"outline"}
-      className="aspect-square h-full w-full rounded-xl border-2 p-1 shadow-md transition-all hover:shadow-lg md:p-4"
+      className="aspect-square h-full w-full rounded-xl border p-1 shadow-md transition-all hover:shadow-lg md:p-4"
     >
       <label
         htmlFor="upload-button"

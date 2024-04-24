@@ -24,7 +24,14 @@ export default async function HomePage() {
     return (
       <main className="flex flex-1 flex-col items-center justify-center gap-16 p-4 text-xl">
         <div className="flex flex-col items-center gap-2">
-          <div className="text-xs md:text-sm">Welcome to</div>
+          <Image
+            src={"/logo.png"}
+            alt="logo"
+            width={200}
+            height={200}
+            className="mb-14 h-[6rem] w-[6rem] drop-shadow-xl"
+          />
+          <div className="text-xs italic md:text-sm">Welcome to</div>
           <div className="text-center text-4xl font-bold leading-tight tracking-tighter md:text-6xl">
             Share. Sreens. Fast.
           </div>
@@ -52,9 +59,6 @@ export default async function HomePage() {
               </Button>
             </SignInButton>
           </ClerkLoaded>
-          <div className="pt-2 text-xs italic text-secondary-foreground">
-            *it takes only couple of seconds
-          </div>
         </div>
       </main>
     );
@@ -63,7 +67,7 @@ export default async function HomePage() {
 
   return (
     <main className="flex-1">
-      <div className="mx-auto w-full max-w-7xl flex-1 p-4">
+      <div className="mx-auto w-full max-w-7xl flex-1 p-4 md:p-6">
         <div className="grid grid-cols-2 items-center justify-items-center gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
           {userImages.map((image) => (
             <ImageComponent

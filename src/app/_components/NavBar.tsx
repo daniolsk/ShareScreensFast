@@ -18,7 +18,7 @@ async function NavBar() {
 
   return (
     <div>
-      <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-4">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between p-4 md:p-6">
         <Logo />
         {user ? (
           <div className="flex items-center gap-2 text-lg">
@@ -34,7 +34,10 @@ async function NavBar() {
             </Link>
             <ThemeToggler />
             <div className="flex w-[40px] items-center justify-center">
-              <UserButton userProfileUrl="/settings/profile" />
+              <UserButton
+                afterSignOutUrl="/"
+                userProfileUrl="/settings/profile"
+              />
             </div>
           </div>
         ) : (

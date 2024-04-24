@@ -17,7 +17,7 @@ function ImageComponent({
   handleDelete: (imageId: number, imageKey: string) => Promise<void>;
 }) {
   return (
-    <div className="relative flex h-full w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border-2 p-2 shadow-md transition-all hover:shadow-lg">
+    <div className="relative flex h-full w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border p-2 shadow-md transition-all hover:shadow-lg">
       <Link
         href={`/img/${image.id}`}
         className="flex aspect-square h-full w-full flex-1 items-center justify-center"
@@ -26,8 +26,8 @@ function ImageComponent({
           <Image
             className="aspect-square w-full rounded-xl object-cover"
             src={image.url}
-            width={150}
-            height={150}
+            width={250}
+            height={250}
             alt="image"
           />
         </div>

@@ -44,7 +44,7 @@ export async function getStripeRedirect() {
             name: "Share Screens Fast Pro",
             description: "Unlimited Screens to share!",
           },
-          unit_amount: 1999,
+          unit_amount: 499,
           recurring: { interval: "month" },
         },
         quantity: 1,
