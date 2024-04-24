@@ -6,7 +6,7 @@
 
 This is an example application made using Next.js 14 (using Server Actions, App Router, etc.) and all the technologies listed below. The main goal was to create a useful application in a SaaS model, to learn how to integrate services like Stripe Payment Processor.
 
-App is live at: [share-screens-fast.vercel.app](share-screens-fast.vercel.app)
+App is live at: [share-screens-fast.vercel.app](https://share-screens-fast.vercel.app/)
 
 ## Features
 
