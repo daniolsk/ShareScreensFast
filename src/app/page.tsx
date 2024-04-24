@@ -33,7 +33,7 @@ export default async function HomePage() {
           />
           <div className="text-xs italic md:text-sm">Welcome to</div>
           <div className="text-center text-4xl font-bold leading-tight tracking-tighter md:text-6xl">
-            Share. Sreens. Fast.
+            Share. Screens. Fast.
           </div>
           <div className="max-w-lg text-center text-base font-light text-foreground md:text-lg">
             Sharing photos with friends, co-workers or yourself to another
