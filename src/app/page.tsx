@@ -1,13 +1,9 @@
-import Link from "next/link";
 import UploadButton from "./_components/UploadButton";
 import { deleteImage, getMyImages } from "@/server/actions/image";
-import DeleteImageButton from "./_components/DeleteImageButton";
 import Image from "next/image";
 import { Loader2, LogIn } from "lucide-react";
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { SignInButton, ClerkLoading, ClerkLoaded } from "@clerk/nextjs";
-import { stripe } from "@/server/stripe";
-import { db } from "@/server/db";
 import { Button } from "@/components/ui/button";
 import ImageComponent from "./_components/ImageComponent";
 

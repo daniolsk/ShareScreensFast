@@ -7,7 +7,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { extractRouterConfig } from "uploadthing/server";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
-import Link from "next/link";
 import { ThemeProvider } from "./_components/ThemeProvider";
 
 import { ClerkProvider } from "@clerk/nextjs";

@@ -6,7 +6,7 @@ import Link from "next/link";
 import React from "react";
 import DeleteImageButton from "./DeleteImageButton";
 import { Button } from "@/components/ui/button";
-import { Share2, Trash } from "lucide-react";
+import { Share2 } from "lucide-react";
 import { toast } from "sonner";
 
 function ImageComponent({

@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { Upload } from "lucide-react";
 import { Loader2 } from "lucide-react";
 import { Progress } from "@/components/ui/progress";
-import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 
 // inferred input off useUploadThing
