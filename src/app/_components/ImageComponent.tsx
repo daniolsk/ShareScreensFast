@@ -26,6 +26,7 @@ function ImageComponent({
           <Image
             className="aspect-square w-full rounded-xl object-cover"
             src={image.url}
+            priority
             width={250}
             height={250}
             alt="image"
