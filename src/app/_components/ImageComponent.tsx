@@ -22,21 +22,23 @@ function ImageComponent({
     <div className="relative flex h-full w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border p-2 shadow-md transition-all hover:shadow-lg">
       <Link
         href={`/img/${image.id}`}
-        className="flex aspect-square h-full w-full flex-1 items-center justify-center"
+        className="flex aspect-square h-full w-full flex-1 items-stretch justify-stretch"
       >
-        <div className="relative flex items-center justify-center overflow-hidden rounded-xl">
+        <div className="relative flex items-stretch justify-stretch overflow-hidden rounded-xl">
           {isLoading ? (
-            <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-xl bg-muted/50">
+            <div className="absolute left-0 top-0 z-10 flex h-full w-full animate-pulse items-center justify-center rounded-xl bg-muted/50">
               <Loader2 className="h-6 w-6 animate-spin" />
             </div>
           ) : null}
           <Image
-            className={`aspect-square w-full rounded-xl object-cover ${isLoading ? "animate-pulse blur-xl" : "animate-none blur-0"}`}
+            className={`aspect-square h-full w-full rounded-xl object-cover ${isLoading ? "animate-pulse blur-xl" : "animate-none blur-0"}`}
             src={image.url}
             priority
             width={250}
             height={250}
-            onLoad={() => setIsLoading(false)}
+            onLoad={() => {
+              setIsLoading(false);
+            }}
             alt="image"
           />
         </div>

@@ -15,7 +15,7 @@ export default function ImageComponent({ imageUrl }: { imageUrl: string }) {
         className="relative flex flex-1 items-center justify-center overflow-hidden rounded-xl"
       >
         {isLoading ? (
-          <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-xl bg-muted/50">
+          <div className="absolute left-0 top-0 z-10 flex h-full w-full animate-pulse items-center justify-center rounded-xl bg-muted/50">
             <Loader2 className="h-8 w-8 animate-spin" />
           </div>
         ) : null}

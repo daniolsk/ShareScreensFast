@@ -11,7 +11,7 @@ export default async function page({ params }: { params: { id: string } }) {
   const handleDelete = async (imageId: number, imageKey: string) => {
     "use server";
 
-    await deleteImage(imageId, imageKey);
+    await deleteImage(imageId, imageKey, "/");
   };
 
   return (
