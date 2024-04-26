@@ -18,7 +18,7 @@ export default async function page({ params }: { params: { id: string } }) {
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-4 overflow-hidden p-4 lg:flex-row">
       <ImageComponent imageUrl={image.url} />
-      <div className="flex flex-col gap-4 overflow-hidden rounded-xl border-2 p-4 px-4">
+      <div className="flex flex-col gap-4 overflow-hidden rounded-xl border-2 p-4 px-4 md:flex-1">
         <div>
           <div className="text-sm text-slate-500">Name</div>
           <div className="truncate text-lg font-semibold">{image.name}</div>
