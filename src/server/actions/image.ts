@@ -62,8 +62,8 @@ export async function deleteImage(
   await db.image.delete({ where: { id: id } });
 
   if (redirectPath) {
-    redirect(redirectPath);
+    return redirect(redirectPath);
   } else {
-    revalidatePath("/");
+    return revalidatePath("/");
   }
 }

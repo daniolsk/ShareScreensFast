@@ -16,6 +16,7 @@ export default function BreadCrumb() {
   const pathNames = paths == "/" ? [""] : paths.split("/");
 
   if (pathNames.find((path) => path == "settings")) return null;
+  if (paths == "/") return null;
 
   const getPath = (index: number) => {
     let pathTmp = "/";
