@@ -1,12 +1,13 @@
 import { deleteImage, getImage } from "@/server/actions/image";
-import Link from "next/link";
 import React from "react";
 import OptionsButtons from "./_components/OptionsButtons";
-import Image from "next/image";
 import ImageComponent from "./_components/ImageComponent";
+import { redirect } from "next/navigation";
 
 export default async function page({ params }: { params: { id: string } }) {
   const image = await getImage(parseInt(params.id));
+
+  if (!image) return redirect("/");
 
   const handleDelete = async (imageId: number, imageKey: string) => {
     "use server";

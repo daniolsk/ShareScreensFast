@@ -32,8 +32,6 @@ export async function getImage(id: number) {
     },
   });
 
-  if (!image) throw new Error("Image not found");
-
   return image;
 }
 
