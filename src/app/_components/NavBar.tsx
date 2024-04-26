@@ -10,6 +10,7 @@ import { UpgradeToProNavButton } from "../../components/StripeActionButtons";
 import { getStripeRedirect } from "@/server/actions/stripe";
 import ThemeToggler from "./ThemeToggler";
 import Logo from "./Logo";
+import BreadCrumb from "./BreadCrumb";
 
 async function NavBar() {
   const user = await currentUser();
@@ -46,6 +47,7 @@ async function NavBar() {
           </div>
         )}
       </div>
+      <BreadCrumb />
     </div>
   );
 }
