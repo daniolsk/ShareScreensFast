@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import OptionsButtons from "./_components/OptionsButtons";
 import Image from "next/image";
+import ImageComponent from "./_components/ImageComponent";
 
 export default async function page({ params }: { params: { id: string } }) {
   const image = await getImage(parseInt(params.id));
@@ -15,23 +16,7 @@ export default async function page({ params }: { params: { id: string } }) {
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-4 overflow-hidden p-4 lg:flex-row">
-      <div className="flex flex-[3] items-stretch rounded-xl border-2 p-4">
-        <Link
-          href={image.url}
-          target="_blank"
-          className="relative flex flex-1 items-center justify-center"
-        >
-          {/*eslint-disable-next-line @next/next/no-img-element*/}
-          <Image
-            fill
-            quality={100}
-            priority
-            src={image.url}
-            alt="image"
-            className="rounded-xl object-cover"
-          />
-        </Link>
-      </div>
+      <ImageComponent imageUrl={image.url} />
       <div className="flex flex-col gap-4 overflow-hidden rounded-xl border-2 p-4 px-4 md:flex-1">
         <div>
           <div className="text-sm text-slate-500">Name</div>

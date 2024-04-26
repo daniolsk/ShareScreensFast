@@ -3,10 +3,10 @@
 import { type Image as ImageType } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import DeleteImageButton from "./DeleteImageButton";
 import { Button } from "@/components/ui/button";
-import { Share2 } from "lucide-react";
+import { Loader2, Share2 } from "lucide-react";
 import { toast } from "sonner";
 
 function ImageComponent({
@@ -16,19 +16,27 @@ function ImageComponent({
   image: ImageType;
   handleDelete: (imageId: number, imageKey: string) => Promise<void>;
 }) {
+  const [isLoading, setIsLoading] = useState(true);
+
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center gap-2 overflow-hidden rounded-xl border p-2 shadow-md transition-all hover:shadow-lg">
       <Link
         href={`/img/${image.id}`}
         className="flex aspect-square h-full w-full flex-1 items-center justify-center"
       >
-        <div className="flex items-center justify-center">
+        <div className="relative flex items-center justify-center overflow-hidden rounded-xl">
+          {isLoading ? (
+            <div className="absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center rounded-xl bg-muted/50">
+              <Loader2 className="h-6 w-6 animate-spin" />
+            </div>
+          ) : null}
           <Image
-            className="aspect-square w-full rounded-xl object-cover"
+            className={`aspect-square w-full rounded-xl object-cover ${isLoading ? "animate-pulse blur-xl" : "animate-none blur-0"}`}
             src={image.url}
             priority
             width={250}
             height={250}
+            onLoad={() => setIsLoading(false)}
             alt="image"
           />
         </div>
