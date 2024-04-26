@@ -14,7 +14,7 @@ export default async function page({ params }: { params: { id: string } }) {
 
     await deleteImage(imageId, imageKey);
 
-    redirect("/");
+    redirect("/img/70");
   };
 
   return (
