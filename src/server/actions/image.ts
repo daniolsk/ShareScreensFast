@@ -35,11 +35,7 @@ export async function getImage(id: number) {
   return image;
 }
 
-export async function deleteImage(
-  id: number,
-  imageKey: string,
-  redirectPath?: string,
-) {
+export async function deleteImage(id: number, imageKey: string) {
   const { userId } = auth();
 
   if (!userId) throw new Error("Unauthorized");
@@ -61,9 +57,5 @@ export async function deleteImage(
 
   await db.image.delete({ where: { id: id } });
 
-  if (redirectPath) {
-    return redirect(redirectPath);
-  } else {
-    return revalidatePath("/");
-  }
+  revalidatePath("/");
 }
