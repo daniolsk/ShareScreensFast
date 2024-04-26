@@ -47,7 +47,7 @@ async function NavBar() {
           </div>
         )}
       </div>
-      <BreadCrumb />
+      {user ? <BreadCrumb /> : null}
     </div>
   );
 }
