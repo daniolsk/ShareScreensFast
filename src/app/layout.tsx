@@ -11,6 +11,7 @@ import { ThemeProvider } from "./_components/ThemeProvider";
 
 import { ClerkProvider } from "@clerk/nextjs";
 import Footer from "./_components/Footer";
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -36,6 +37,7 @@ export default function RootLayout({
           suppressHydrationWarning={true}
           className={`font-sans ${inter.variable} flex min-h-screen flex-1 flex-col`}
         >
+          <NextTopLoader showSpinner={false} />
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
