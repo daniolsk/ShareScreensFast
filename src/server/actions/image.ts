@@ -58,4 +58,5 @@ export async function deleteImage(id: number, imageKey: string) {
   await db.image.delete({ where: { id: id } });
 
   revalidatePath("/");
+  redirect("/");
 }
