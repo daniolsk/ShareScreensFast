@@ -10,12 +10,6 @@ import ImageComponent from "./_components/ImageComponent";
 export default async function HomePage() {
   const { userId } = auth();
 
-  const handleDelete = async (imageId: number, imageKey: string) => {
-    "use server";
-
-    await deleteImage(imageId, imageKey);
-  };
-
   if (!userId)
     return (
       <main className="flex flex-1 flex-col items-center justify-center gap-16 p-4 text-xl">
@@ -68,7 +62,7 @@ export default async function HomePage() {
           {userImages.map((image) => (
             <ImageComponent
               key={image.id}
-              handleDelete={handleDelete}
+              handleDelete={deleteImage}
               image={image}
             />
           ))}

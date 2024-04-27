@@ -1,5 +1,4 @@
 "use server";
-import "server-only";
 
 import { currentUser, auth } from "@clerk/nextjs/server";
 import { db } from "@/server/db";

@@ -9,12 +9,6 @@ export default async function page({ params }: { params: { id: string } }) {
 
   if (!image) return redirect("/");
 
-  const handleDelete = async (imageId: number, imageKey: string) => {
-    "use server";
-
-    await deleteImage(imageId, imageKey);
-  };
-
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-4 overflow-hidden p-4 lg:flex-row">
       <ImageComponent imageUrl={image.url} />
@@ -30,7 +24,7 @@ export default async function page({ params }: { params: { id: string } }) {
           </div>
         </div>
         <div className="flex-1"></div>
-        <OptionsButtons image={image} handleDelete={handleDelete} />
+        <OptionsButtons image={image} handleDelete={deleteImage} />
       </div>
     </main>
   );

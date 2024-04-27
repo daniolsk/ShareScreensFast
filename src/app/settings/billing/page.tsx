@@ -15,12 +15,6 @@ export default async function Page() {
 
   if (!userId) return redirect("/");
 
-  const handleStripeAction = async () => {
-    "use server";
-
-    await getStripeRedirect();
-  };
-
   const limit = await db.userImageUploadLimit.findUnique({
     where: {
       userId,
@@ -57,12 +51,12 @@ export default async function Page() {
         <div>
           {!isSubscribed ? (
             <div>
-              <UpgradeToProButton handleUpgradeToPro={handleStripeAction} />
+              <UpgradeToProButton handleUpgradeToPro={getStripeRedirect} />
             </div>
           ) : (
             <div>
               <ShowSubscriptionDetailsButton
-                handleManageSubscription={handleStripeAction}
+                handleManageSubscription={getStripeRedirect}
               />
             </div>
           )}
