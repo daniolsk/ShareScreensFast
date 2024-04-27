@@ -13,8 +13,6 @@ export default async function page({ params }: { params: { id: string } }) {
     "use server";
 
     await deleteImage(imageId, imageKey);
-
-    redirect("/img");
   };
 
   return (
