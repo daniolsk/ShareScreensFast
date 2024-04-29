@@ -7,7 +7,7 @@ import Image from "next/image";
 function Logo() {
   return (
     <Link
-      href={"/"}
+      href={"/dashboard"}
       className="flex items-center gap-4 text-xl font-semibold transition-all hover:scale-105"
     >
       <Image

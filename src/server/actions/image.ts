@@ -3,12 +3,12 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { db } from "@/server/db";
 import { utapi } from "@/server/uploadthing";
-import { decrementLimit } from "@/lib/limits";
+import { decrementImagesUploadLimit } from "@/lib/limits";
 import { checkSubscription } from "@/lib/subscription";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
-export async function getMyImages() {
+export async function getMyImages(albumId?: string) {
   const user = await currentUser();
 
   if (!user) throw new Error("Unauthorized");
@@ -16,6 +16,7 @@ export async function getMyImages() {
   const images = await db.image.findMany({
     where: {
       userId: user.id,
+      ...(albumId ? { albumId: parseInt(albumId) } : {}),
     },
     orderBy: {
       createdAt: "asc",
@@ -35,7 +36,11 @@ export async function getImage(id: number) {
   return image;
 }
 
-export async function deleteImage(id: number, imageKey: string) {
+export async function deleteImage(
+  id: number,
+  imageKey: string,
+  redirectPath?: string,
+) {
   const { userId } = auth();
 
   if (!userId) throw new Error("Unauthorized");
@@ -44,7 +49,7 @@ export async function deleteImage(id: number, imageKey: string) {
 
   const isSubscribed = await checkSubscription();
 
-  if (!isSubscribed) await decrementLimit();
+  if (!isSubscribed) await decrementImagesUploadLimit();
 
   const image = await db.image.findFirst({
     where: {
@@ -57,6 +62,9 @@ export async function deleteImage(id: number, imageKey: string) {
 
   await db.image.delete({ where: { id: id } });
 
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/dashboard");
+
+  if (redirectPath) {
+    redirect(redirectPath);
+  }
 }

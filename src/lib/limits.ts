@@ -1,8 +1,8 @@
-import { UPLOAD_IMAGE_LIMIT } from "@/constants/uploadImageLimit";
+import { UPLOAD_IMAGE_LIMIT, ALBUMS_LIMIT } from "@/constants/uploadImageLimit";
 import { db } from "@/server/db";
 import { auth } from "@clerk/nextjs/server";
 
-export const checkIfLimit = async (imagesToUpload: number) => {
+export const chceckIfImagesUploadLimit = async (imagesToUpload: number) => {
   const { userId } = auth();
 
   if (!userId) return false;
@@ -29,7 +29,7 @@ export const checkIfLimit = async (imagesToUpload: number) => {
   return false;
 };
 
-export const incrementLimit = async (imagesToUpload: number) => {
+export const incrementImagesUploadLimit = async (imagesToUpload: number) => {
   const { userId } = auth();
 
   if (!userId) return false;
@@ -59,7 +59,7 @@ export const incrementLimit = async (imagesToUpload: number) => {
   }
 };
 
-export const decrementLimit = async () => {
+export const decrementImagesUploadLimit = async () => {
   const { userId } = auth();
 
   if (!userId) return;
@@ -76,6 +76,86 @@ export const decrementLimit = async () => {
     },
     data: {
       uploadedImages: limitFromDb!.uploadedImages - 1,
+    },
+  });
+};
+
+export const chceckIfAlbumsLimit = async () => {
+  const { userId } = auth();
+
+  if (!userId) return false;
+
+  let limitFromDb = await db.userAlbumLimit.findUnique({
+    where: {
+      userId,
+    },
+  });
+
+  if (!limitFromDb) {
+    limitFromDb = await db.userAlbumLimit.create({
+      data: {
+        userId,
+        createdAlbums: 0,
+      },
+    });
+
+    return false;
+  }
+
+  if (limitFromDb.createdAlbums + 1 > ALBUMS_LIMIT) {
+    return true;
+  }
+
+  return false;
+};
+
+export const incrementAlbumsLimit = async () => {
+  const { userId } = auth();
+
+  if (!userId) return false;
+
+  const limitFromDb = await db.userAlbumLimit.findUnique({
+    where: {
+      userId,
+    },
+  });
+
+  if (!limitFromDb) {
+    await db.userAlbumLimit.create({
+      data: {
+        userId,
+        createdAlbums: 0,
+      },
+    });
+  } else {
+    await db.userAlbumLimit.update({
+      where: {
+        userId,
+      },
+      data: {
+        createdAlbums: limitFromDb.createdAlbums + 1,
+      },
+    });
+  }
+};
+
+export const decrementAlbumsLimit = async () => {
+  const { userId } = auth();
+
+  if (!userId) return;
+
+  const limitFromDb = await db.userAlbumLimit.findUnique({
+    where: {
+      userId,
+    },
+  });
+
+  await db.userAlbumLimit.update({
+    where: {
+      userId,
+    },
+    data: {
+      createdAlbums: limitFromDb!.createdAlbums - 1,
     },
   });
 };

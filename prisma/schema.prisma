@@ -19,6 +19,9 @@ model Image {
   key       String   @unique
   userId    String
 
+  albumId Int?
+  Alubm   Album? @relation(fields: [albumId], references: [id])
+
   @@index([name])
 }
 
@@ -35,4 +38,20 @@ model UserImageUploadLimit {
   id             Int    @id @default(autoincrement())
   userId         String @unique
   uploadedImages Int
+}
+
+model UserAlbumLimit {
+  id            Int    @id @default(autoincrement())
+  userId        String @unique
+  createdAlbums Int
+}
+
+model Album {
+  id        Int      @id @default(autoincrement())
+  name      String
+  userId    String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  images Image[]
 }

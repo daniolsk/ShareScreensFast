@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { stripe } from "../stripe";
 import { absolutePath } from "@/lib/utils";
 
-const settingsUrl = absolutePath("/");
+const settingsUrl = absolutePath("/dashboard");
 
 export async function getStripeRedirect() {
   const { userId } = auth();

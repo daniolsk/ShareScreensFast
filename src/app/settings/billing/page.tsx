@@ -2,7 +2,7 @@ import {
   ShowSubscriptionDetailsButton,
   UpgradeToProButton,
 } from "@/components/StripeActionButtons";
-import { UPLOAD_IMAGE_LIMIT } from "@/constants/uploadImageLimit";
+import { ALBUMS_LIMIT, UPLOAD_IMAGE_LIMIT } from "@/constants/uploadImageLimit";
 import { checkSubscription } from "@/lib/subscription";
 import { getStripeRedirect } from "@/server/actions/stripe";
 import { db } from "@/server/db";
@@ -15,7 +15,12 @@ export default async function Page() {
 
   if (!userId) return redirect("/");
 
-  const limit = await db.userImageUploadLimit.findUnique({
+  const imagesLimit = await db.userImageUploadLimit.findUnique({
+    where: {
+      userId,
+    },
+  });
+  const albumLimit = await db.userAlbumLimit.findUnique({
     where: {
       userId,
     },
@@ -42,9 +47,19 @@ export default async function Page() {
             <div className="text-2xl font-bold">
               {isSubscribed
                 ? `(Infinity)`
-                : limit
-                  ? `${limit.uploadedImages} / ${UPLOAD_IMAGE_LIMIT}`
+                : imagesLimit
+                  ? `${imagesLimit.uploadedImages} / ${UPLOAD_IMAGE_LIMIT}`
                   : `0 / ${UPLOAD_IMAGE_LIMIT}`}
+            </div>
+          </div>
+          <div className="flex items-end gap-4">
+            <div className="text-base">Albums left:</div>
+            <div className="text-2xl font-bold">
+              {isSubscribed
+                ? `(Infinity)`
+                : albumLimit
+                  ? `${albumLimit.createdAlbums} / ${ALBUMS_LIMIT}`
+                  : `0 / ${ALBUMS_LIMIT}`}
             </div>
           </div>
         </div>

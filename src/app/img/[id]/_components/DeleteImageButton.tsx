@@ -24,7 +24,11 @@ function DeleteImageButton({
 }: {
   imageId: number;
   imageKey: string;
-  handleDelete: (imageId: number, imageKey: string) => Promise<void>;
+  handleDelete: (
+    imageId: number,
+    imageKey: string,
+    path?: string,
+  ) => Promise<void>;
 }) {
   return (
     <AlertDialog>
@@ -56,7 +60,7 @@ function DeleteImageButton({
                 },
               );
 
-              await handleDelete(imageId, imageKey);
+              await handleDelete(imageId, imageKey, "/dashboard");
 
               toast.dismiss("delete-begin");
               toast.success("Image deleted!");

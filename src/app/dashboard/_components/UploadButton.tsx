@@ -14,29 +14,34 @@ type Input = Parameters<typeof useUploadThing>;
 const useUploadThingInputProps = (...args: Input) => {
   const $ut = useUploadThing(...args);
 
-  const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    albumId?: string,
+  ) => {
     if (!e.target.files) return;
 
     const selectedFiles = Array.from(e.target.files);
-    const result = await $ut.startUpload(selectedFiles);
+    const result = await $ut.startUpload(selectedFiles, {
+      albumId: albumId ?? null,
+    });
 
     console.log("uploaded files", result);
   };
 
   return {
     inputProps: {
-      onChange,
       multiple: ($ut.permittedFileInfo?.config?.image?.maxFileCount ?? 1) > 1,
       accept: "image/*",
     },
+    onChange,
     isUploading: $ut.isUploading,
   };
 };
 
-export default function UploadFileTile() {
+export default function UploadFileTile({ albumId }: { albumId?: string }) {
   const router = useRouter();
 
-  const { inputProps } = useUploadThingInputProps("imageUploader", {
+  const { inputProps, onChange } = useUploadThingInputProps("imageUploader", {
     onUploadBegin() {
       toast(
         <div className="flex w-full items-center gap-4">
@@ -101,6 +106,7 @@ export default function UploadFileTile() {
         type="file"
         className="sr-only"
         {...inputProps}
+        onChange={(e) => onChange(e, albumId)}
       />
     </Button>
   );

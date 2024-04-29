@@ -16,6 +16,11 @@ App is live at: [share-screens-fast.vercel.app](https://share-screens-fast.verce
 - [x] Subscription payments using [Stripe](https://stripe.com/en-pl)
 - [x] Webhooks listening to Stripe events (to know when user subscribe)
 - [x] Default demo account with limited amount of uploads
-- [x] Pro plan without any limitations 
+- [x] Pro plan without any limitations
 
 And more soon...
+
+### TODO
+
+- [x] Delete album with all images
+- [x] Fix limits

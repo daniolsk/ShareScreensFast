@@ -7,7 +7,7 @@ import { redirect } from "next/navigation";
 export default async function page({ params }: { params: { id: string } }) {
   const image = await getImage(parseInt(params.id));
 
-  if (!image) return redirect("/");
+  if (!image) return redirect("/dashboard");
 
   return (
     <main className="mx-auto flex w-full max-w-7xl flex-1 flex-col gap-4 overflow-hidden p-4 lg:flex-row">
