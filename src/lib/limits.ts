@@ -59,7 +59,7 @@ export const incrementImagesUploadLimit = async (imagesToUpload: number) => {
   }
 };
 
-export const decrementImagesUploadLimit = async () => {
+export const decrementImagesUploadLimit = async (number?: number) => {
   const { userId } = auth();
 
   if (!userId) return;
@@ -75,7 +75,7 @@ export const decrementImagesUploadLimit = async () => {
       userId,
     },
     data: {
-      uploadedImages: limitFromDb!.uploadedImages - 1,
+      uploadedImages: limitFromDb!.uploadedImages - (number ? number : 1),
     },
   });
 };

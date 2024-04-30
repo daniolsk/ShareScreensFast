@@ -7,9 +7,11 @@ import { checkSubscription } from "@/lib/subscription";
 import {
   chceckIfAlbumsLimit,
   decrementAlbumsLimit,
+  decrementImagesUploadLimit,
   incrementAlbumsLimit,
 } from "@/lib/limits";
 import { revalidatePath } from "next/cache";
+import { utapi } from "@/server/uploadthing";
 
 export async function getMyAlbums() {
   const user = await currentUser();
@@ -53,7 +55,7 @@ export async function addAlbum(name: string) {
   redirect(`/dashboard?album=${album.id}`);
 }
 
-export async function deleteAlbum(id: number, includeImages?: boolean) {
+export async function deleteAlbum(albumId: number, includeImages?: boolean) {
   const { userId } = auth();
 
   if (!userId) throw new Error("Unauthorized");
@@ -64,7 +66,7 @@ export async function deleteAlbum(id: number, includeImages?: boolean) {
 
   const album = await db.album.findFirst({
     where: {
-      id: id,
+      id: albumId,
     },
   });
 
@@ -72,14 +74,52 @@ export async function deleteAlbum(id: number, includeImages?: boolean) {
   if (album.userId !== userId) throw new Error("Unauthorized");
 
   if (includeImages) {
-    const albumDelete = db.album.delete({ where: { id: id } });
-    const imagesDelete = db.image.deleteMany({ where: { albumId: id } });
+    const imagesKeys = await db.image
+      .findMany({
+        where: {
+          albumId: albumId,
+        },
+        select: {
+          key: true,
+        },
+      })
+      .then((images) => images.map((image) => image.key));
 
-    await db.$transaction([albumDelete, imagesDelete]);
+    const numberOfImages = await deleteImagesInAlbum(albumId, imagesKeys);
+
+    if (isSubscribed) {
+      if (numberOfImages > 0) {
+        await decrementImagesUploadLimit(numberOfImages);
+      }
+    }
+
+    await db.album.delete({ where: { id: albumId } });
   } else {
-    await db.album.delete({ where: { id: id } });
+    await db.album.delete({ where: { id: albumId } });
   }
 
   revalidatePath("/dashboard");
   redirect("/dashboard");
+}
+
+async function deleteImagesInAlbum(alubmId: number, imagesKeys: string[]) {
+  const { userId } = auth();
+
+  if (!userId) throw new Error("Unauthorized");
+
+  await utapi.deleteFiles([...imagesKeys]);
+
+  const numberOfImages = await db.image.count({
+    where: {
+      albumId: alubmId,
+    },
+  });
+
+  await db.image.deleteMany({
+    where: {
+      albumId: alubmId,
+    },
+  });
+
+  return numberOfImages;
 }

@@ -62,8 +62,7 @@ function DeleteImageButton({
             <div className="flex items-center gap-2">
               <Checkbox
                 id="include-images"
-                disabled
-                // disabled={isPending}
+                disabled={isPending}
                 name="include-images"
               />
               <Label htmlFor="include-images" className="col-span-3">
