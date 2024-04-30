@@ -28,7 +28,7 @@ export default function SideBar({
       >
         <Link href="/dashboard">All images</Link>
       </Button>
-      <div className="w-full border-r-2 px-2 md:border-b-2 md:border-r-0 md:py-2"></div>
+      <div className="self-stretch border-r-2 px-2 md:w-full md:border-b-2 md:border-r-0 md:py-2"></div>
       <div className="flex w-full flex-row gap-2 md:flex-col">
         <div className="flex items-center justify-center gap-2 px-4 text-xs text-muted-foreground md:py-4">
           <Album size={14} /> <span className="hidden md:block">Albums</span>
