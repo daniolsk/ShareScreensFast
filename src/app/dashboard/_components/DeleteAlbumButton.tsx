@@ -31,7 +31,7 @@ function DeleteImageButton({
         <Button
           size={"icon"}
           variant={"ghost"}
-          className="hover:bg-destructive hover:text-destructive-foreground"
+          className="flex-shrink-0 rounded-xl rounded-l-none hover:bg-destructive hover:text-destructive-foreground"
         >
           <Trash size={15} />
         </Button>

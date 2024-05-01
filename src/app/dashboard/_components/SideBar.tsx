@@ -15,16 +15,16 @@ export default function SideBar({
   addAlbum,
 }: {
   albums: AlbumType[];
-  addAlbum: (name: string) => Promise<void>;
+  addAlbum: (name: string) => Promise<{ error: string } | void>;
 }) {
   const query = useSearchParams();
 
   return (
-    <div className="flex min-w-[200px] flex-row items-center overflow-x-auto p-4 md:flex-col md:p-6">
+    <div className="flex flex-row items-center overflow-x-auto p-4 md:w-[250px] md:flex-col md:p-6 lg:w-[300px]">
       <Button
         asChild
         variant={!query.get("album") ? "default" : "ghost"}
-        className="justify-start md:w-full"
+        className="justify-start border md:w-full"
       >
         <Link href="/dashboard">All images</Link>
       </Button>
@@ -35,12 +35,9 @@ export default function SideBar({
         </div>
         <div className="flex max-w-full flex-row gap-2 md:flex-col">
           {albums.map((album) => (
-            <div
-              key={album.id}
-              className="flex gap-2 rounded-xl border-2 p-1 md:border-0 md:p-0"
-            >
+            <div key={album.id} className="flex rounded-xl border">
               <Button
-                className="w-full justify-start"
+                className="w-full max-w-full justify-start truncate rounded-xl rounded-r-none"
                 asChild
                 variant={
                   query.get("album") === album.id.toString()

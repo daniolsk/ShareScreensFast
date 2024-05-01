@@ -8,6 +8,7 @@ import DeleteImageButton from "./DeleteImageButton";
 import { Button } from "@/components/ui/button";
 import { Loader2, Share2 } from "lucide-react";
 import { toast } from "sonner";
+import { absolutePath } from "@/lib/utils";
 
 function ImageComponent({
   image,
@@ -31,7 +32,7 @@ function ImageComponent({
             </div>
           ) : null}
           <Image
-            className={`aspect-square h-full w-full rounded-xl object-cover ${isLoading ? "animate-pulse blur-xl" : "animate-none blur-0"}`}
+            className={`aspect-square h-full w-full rounded-xl object-cover ${isLoading ? "animate-pulse blur-xl" : "animate-none blur-0"} transition-all hover:scale-105`}
             src={image.url}
             priority
             width={250}
@@ -49,7 +50,7 @@ function ImageComponent({
           className="flex-1"
           onClick={async () => {
             await navigator.clipboard.writeText(
-              window.location.href + `img/${image.id}`,
+              absolutePath(`/img/${image.id}`),
             );
             toast("Link copied to clipboard!");
           }}

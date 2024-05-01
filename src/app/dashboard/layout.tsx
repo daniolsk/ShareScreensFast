@@ -11,7 +11,7 @@ export default async function layout({
   const userAlbums = await getMyAlbums();
 
   return (
-    <div className="flex flex-1 flex-col md:flex-row">
+    <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col md:flex-row">
       <SideBar addAlbum={addAlbum} albums={userAlbums} />
       {children}
     </div>
