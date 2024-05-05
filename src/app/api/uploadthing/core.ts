@@ -21,7 +21,7 @@ export const ourFileRouter = {
     .middleware(async ({ files, input }) => {
       files.forEach((file) => {
         if (file.size > 16 * 1024 * 1024) {
-          throw new UploadThingError("File is too large");
+          throw new UploadThingError("File is too large!");
         }
       });
       // This code runs on your server before upload

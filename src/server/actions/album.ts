@@ -87,7 +87,9 @@ export async function deleteAlbum(albumId: number, includeImages?: boolean) {
 
     const numberOfImages = await deleteImagesInAlbum(albumId, imagesKeys);
 
-    if (isSubscribed) {
+    console.log(numberOfImages);
+
+    if (!isSubscribed) {
       if (numberOfImages > 0) {
         await decrementImagesUploadLimit(numberOfImages);
       }
