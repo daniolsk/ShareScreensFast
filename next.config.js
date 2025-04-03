@@ -14,6 +14,12 @@ const config = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "z23lsy5hob.ufs.sh",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   typescript: {
