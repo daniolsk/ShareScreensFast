@@ -47,7 +47,7 @@ export const ourFileRouter = {
       // This code RUNS ON YOUR SERVER after upload
       await db.image.create({
         data: {
-          url: file.url,
+          url: file.ufsUrl,
           userId: metadata.userId,
           name: file.name,
           key: file.key,
