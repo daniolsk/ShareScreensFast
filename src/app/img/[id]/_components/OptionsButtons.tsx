@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import type { Image } from "@prisma/client";
 import React from "react";
 import { toast } from "sonner";
+import { useUser } from "@clerk/nextjs";
 
 function OptionsButtons({
   image,
@@ -13,6 +14,8 @@ function OptionsButtons({
   image: Image;
   handleDelete: (imageId: number, imageKey: string) => Promise<void>;
 }) {
+  const { user } = useUser();
+
   return (
     <div className="flex gap-4">
       <Button
@@ -25,11 +28,13 @@ function OptionsButtons({
       >
         Share Link
       </Button>
-      <DeleteImageButton
-        imageId={image.id}
-        imageKey={image.key}
-        handleDelete={handleDelete}
-      />
+      {user?.id === image.userId && (
+        <DeleteImageButton
+          imageId={image.id}
+          imageKey={image.key}
+          handleDelete={handleDelete}
+        />
+      )}
     </div>
   );
 }
